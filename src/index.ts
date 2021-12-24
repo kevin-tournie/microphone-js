@@ -13,10 +13,12 @@ const BUFFER_SIZE = 2048;
 const LEFT_CHAN_DATA = 0;
 const RIGHT_CHAN_DATA = 1;
 
-const initialState: AudioState = {
-  leftChan: [],
-  rightChan: [],
-  recordingLength: 0,
+const initialState = () : AudioState => {
+    return {    
+      leftChan: [],
+      rightChan: [],
+      recordingLength: 0,
+    }
 };
 
 export const Microphone = (
@@ -26,7 +28,7 @@ export const Microphone = (
   let source: MediaStreamAudioSourceNode | undefined;
   let recorder: ScriptProcessorNode | undefined;
   let blob: Blob | undefined;
-  let audioState: AudioState = { ...initialState };
+  let audioState: AudioState = initialState();
 
   const isMono: boolean = !!(instanceConfig && instanceConfig.isMono);
 
@@ -85,7 +87,7 @@ export const Microphone = (
   };
 
   const reset = () => {
-    audioState = { ...initialState };
+    audioState = initialState();
   };
 
   // // http://soundfile.sapp.org/doc/WaveFormat/
